@@ -1,7 +1,8 @@
+#include <cstdlib>
 #include <dpp.h>
 
 // discord botのトークン
-const std::string token = "test";
+const std::string token = std::getenv("DISCORD_TOKEN");
 
 int main() {
   dpp::cluster bot(token);
