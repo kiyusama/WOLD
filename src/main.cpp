@@ -1,3 +1,4 @@
+#include "PacketSender.hpp"
 #include <cstdlib>
 #include <dpp.h>
 
@@ -5,14 +6,17 @@
 const std::string token = std::getenv("DISCORD_TOKEN");
 
 int main() {
+  PacketSender wolSender;
+
   dpp::cluster bot(token);
 
   bot.on_log(dpp::utility::cout_logger());
 
   // コマンドの実装
-  bot.on_slashcommand([](const dpp::slashcommand_t &event) {
+  bot.on_slashcommand([&wolSender](const dpp::slashcommand_t &event) {
     if (event.command.get_command_name() == "test") {
       event.reply("ok!");
+      wolSender.sendWOL();
     }
   });
 
