@@ -16,6 +16,8 @@ int main() {
   bot.on_slashcommand([&wolSender](const dpp::slashcommand_t &event) {
     if (event.command.get_command_name() == "test") {
       event.reply("ok!");
+    } else if (event.command.get_command_name() == "on") {
+      event.reply("Switch On!");
       wolSender.sendWOL();
     }
   });
@@ -24,6 +26,8 @@ int main() {
     if (dpp::run_once<struct register_bot_commands>()) {
       bot.global_command_create(
           dpp::slashcommand("test", "this is a test command", bot.me.id));
+      bot.global_command_create(
+          dpp::slashcommand("on", "turn pc power on", bot.me.id));
     }
   });
 
